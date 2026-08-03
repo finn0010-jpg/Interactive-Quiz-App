@@ -51,11 +51,20 @@ startButton.addEventListener('click', () => {
         categorySelect.appendChild(optionElement);
     });
 
-})
+    categorySelect.addEventListener('change', () => {
+        if (categorySelect.value === 'select') {
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = 'Please select a category to continue.';
+            errorMessage.classList.add('error-message');
+            mainContent.appendChild(errorMessage);
+        } else {
+            loadQuestions(categorySelect.value);
+        }
+    });
+});
 
 
 function loadQuestions(category) {
-    mainContent.innerHTML = '';
-    mainHeader.innerHTML = '';
+    categorySelect.remove();
+    mainHeader.textContent = "";
 }
-
