@@ -63,6 +63,8 @@ startButton.addEventListener('click', () => {
     });
 });
 
+// Back button functionality
+
 
 function loadQuestions(category) {
     categorySelect.remove();
