@@ -87,8 +87,21 @@ function loadQuestions(category) {
     mainHeader.appendChild(backButton);
 
     backButton.addEventListener('click', () => {
-        showCategoryView();
+
+        let hasBeenClicked = true;
+
+        if (hasBeenClicked) {
+        
+            categorySelect.innerHTML = '';
+
+            categorySelect.remove();
+
+            hasBeenClicked = false;
+            showCategoryView();
+        } 
     });
 }
 
-// Function to save users answers to JSON file every time a question is answered
+
+// Function to save users answers to JSON file every time a question is answered 
+
