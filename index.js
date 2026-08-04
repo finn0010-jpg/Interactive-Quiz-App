@@ -66,7 +66,17 @@ startButton.addEventListener('click', () => {
 // Back button functionality
 
 
+
 function loadQuestions(category) {
     categorySelect.remove();
     mainHeader.textContent = "";
+
+    let backButton = document.createElement('button');
+    backButton.textContent = 'Back';
+    backButton.classList.add('back-button');
+    mainHeader.appendChild(backButton);
+
+    backButton.addEventListener('click', () => {
+        window.history.go(-1);
+    })
 }
