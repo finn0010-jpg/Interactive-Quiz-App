@@ -11,7 +11,7 @@ const categoryOptions = [
         { value: 'science', text: 'Science' },
         { value: 'history', text: 'History' },
         { value: 'sports', text: 'Sports' },
-        { value: 'entertainment', text: 'Entertainment' }
+        { value: 'capitals', text: 'Capitals' }
     ]
 
 let categorySelect = document.createElement('select');
