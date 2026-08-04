@@ -1,11 +1,9 @@
-{
-    "questions": [
-        {
-            "question_id": "q1"
-            "category": "Capitals"
-            "question_text": "What is the capital of France?",
-            "options": ["Berlin", "Madrid", "Paris", "Rome"],
-            "correctAnswer": "Paris"
+[
+    {
+        "question_id": "q1"
+        "category": "Capitals"
+        "question_text": "What is the capital of France?",
+        "options": ["Berlin", "Madrid", "Paris", "Rome"],
+        "correctAnswer": "Paris"
         }
     ]
-}
