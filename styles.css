@@ -46,7 +46,7 @@ body {
     gap: 20px;
 }
 
-.main-content button {
+.start-button {
     padding: 10px 20px;
     background: var(--primary-color);
     color: white;

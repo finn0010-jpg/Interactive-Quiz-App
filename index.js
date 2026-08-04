@@ -21,27 +21,31 @@ let categorySelect = document.createElement('select');
     categorySelect.name = 'category-select';
 
 
-// Function for inital DOM load
-function loadInitialScreen() {
+let currentView = 'home';
+
+// Function to show the home view
+function showHomeView() {
     header = document.createElement('h1');
     header.textContent = 'Welcome! This is a quiz that will test your general knowledge. Click the button below to start the quiz.';
     header.classList.add('main-header');
     mainHeader.appendChild(header);
-    
+
     startButton = document.createElement('button');
     startButton.textContent = 'Start Quiz';
     startButton.classList.add('start-button');
     mainContent.appendChild(startButton);
-}
-// Initial load screen
-document.addEventListener('DOMContentLoaded', loadInitialScreen())
 
-// Event listener for start button
-startButton.addEventListener('click', () => {
+    currentView = 'home';
+}
+
+document.addEventListener('DOMContentLoaded', showHomeView());
+
+// Function to show the category selection view
+function showCategoryView() {
     mainHeader.innerHTML = '';
-    mainHeader.textContent = 'Select your category:'
     mainContent.innerHTML = '';
 
+    mainHeader.textContent = 'Select your category:';
     mainContent.appendChild(categorySelect);
 
     categoryOptions.forEach(option => {
@@ -51,7 +55,10 @@ startButton.addEventListener('click', () => {
         categorySelect.appendChild(optionElement);
     });
 
-    categorySelect.addEventListener('change', () => {
+    currentView = 'categories';
+}
+
+categorySelect.addEventListener('change', () => {
         if (categorySelect.value === 'select') {
             const errorMessage = document.createElement('p');
             errorMessage.textContent = 'Please select a category to continue.';
@@ -61,22 +68,27 @@ startButton.addEventListener('click', () => {
             loadQuestions(categorySelect.value);
         }
     });
+
+
+
+startButton.addEventListener('click', () => {
+    showCategoryView();
 });
 
-// Back button functionality
 
-
-
+// Function to load questions based on selected category
 function loadQuestions(category) {
     categorySelect.remove();
-    mainHeader.textContent = "";
+    mainHeader.textContent = '';
 
-    let backButton = document.createElement('button');
+    const backButton = document.createElement('button');
     backButton.textContent = 'Back';
     backButton.classList.add('back-button');
     mainHeader.appendChild(backButton);
 
     backButton.addEventListener('click', () => {
-        window.history.go(-1);
-    })
+        showCategoryView();
+    });
 }
+
+// Function to save users answers to JSON file every time a question is answered
