@@ -66,6 +66,7 @@ categorySelect.addEventListener('change', () => {
             mainContent.appendChild(errorMessage);
         } else {
             loadQuestions(categorySelect.value);
+            loadData();
         }
     });
 
@@ -100,8 +101,35 @@ function loadQuestions(category) {
             showCategoryView();
         } 
     });
+
+
 }
 
 
-// Function to save users answers to JSON file every time a question is answered 
+function displayQuestions(questions) {
+    questions.forEach((questionObj, index) => {
+        mainContent.innerHTML += `
+            <div class="question-container">
+                <h2>Question ${index + 1}:</h2>
+                <p>${questionObj.question}</p>
+            </div>
+        `;
+    });
+}
+// Function to load questions once a category is selected
+async function loadData() {
+    try {
+        const response = await fetch('./questionsandanswers.json');
 
+        const data = await response.json();
+
+
+    if (categorySelect.value === 'general') {
+        const generalQuestions = data.general;
+        displayQuestions(generalQuestions);
+    }
+            
+    } catch (error) {
+        console.error('Error loading data:', error);
+    }
+}
