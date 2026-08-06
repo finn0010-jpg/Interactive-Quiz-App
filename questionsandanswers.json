@@ -1,9 +1,187 @@
 [
+
+
     {
-        "question_id": "q1"
-        "category": "Capitals"
+        "question_id": "q1_capitals",
+        "category": "Capitals",
         "question_text": "What is the capital of France?",
         "options": ["Berlin", "Madrid", "Paris", "Rome"],
         "correctAnswer": "Paris"
-        }
-    ]
+    },
+    {
+        "question_id": "q2_capitals",
+        "category": "Capitals",
+        "question_text": "What is the capital of Japan?",
+        "options": ["Beijing", "Tokyo", "Seoul", "Bangkok"],
+        "correctAnswer": "Tokyo"
+    },
+    {
+        "question_id": "q3_capitals",
+        "category": "Capitals",
+        "question_text": "What is the capital of Canada?",
+        "options": ["Ottawa", "Toronto", "Vancouver", "Montreal"],
+        "correctAnswer": "Ottawa"
+    },
+    {
+        "question_id": "q4_capitals",
+        "category": "Capitals",
+        "question_text": "What is the capital of Australia?",
+        "options": ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+        "correctAnswer": "Canberra"
+    },
+    {
+        "question_id": "q5_capitals",
+        "category": "Capitals",
+        "question_text": "What is the capital of Brazil?",
+        "options": ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"],
+        "correctAnswer": "Brasília"
+    },
+
+
+    {
+        "question_id": "q1_general",
+        "category": "General Knowledge",
+        "question_text": "What is the largest planet in our solar system?",
+        "options": ["Earth", "Jupiter", "Saturn", "Mars"],
+        "correctAnswer": "Jupiter"
+    },
+    {
+        "question_id": "q2_general",
+        "category": "General Knowledge",
+        "question_text": "Who wrote the play 'Romeo and Juliet'?",
+        "options": ["William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"],
+        "correctAnswer": "William Shakespeare"
+    },
+    {
+        "question_id": "q3_general",
+        "category": "General Knowledge",
+        "question_text": "What is the chemical symbol for water?",
+        "options": ["H2O", "O2", "CO2", "NaCl"],
+        "correctAnswer": "H2O"
+    },
+    {
+        "question_id": "q4_general",
+        "category": "General Knowledge",
+        "question_text": "What is the tallest mountain in the world?",
+        "options": ["Mount Everest", "K2", "Kangchenjunga", "Lhotse"],
+        "correctAnswer": "Mount Everest"
+    },
+    {
+        "question_id": "q5_general",
+        "category": "General Knowledge",
+        "question_text": "Who painted the Mona Lisa?",
+        "options": ["Leonardo da Vinci", "Vincent van Gogh", "Pablo Picasso", "Claude Monet"],
+        "correctAnswer": "Leonardo da Vinci"
+    },
+
+
+    {
+        "question_id": "q1_science",
+        "category": "Science",
+        "question_text": "What is the chemical symbol for gold?",
+        "options": ["Au", "Ag", "Fe", "Hg"],
+        "correctAnswer": "Au"
+    },
+    {
+        "question_id": "q2_science",
+        "category": "Science",
+        "question_text": "What is the process by which plants make their food?",
+        "options": ["Photosynthesis", "Respiration", "Transpiration", "Fermentation"],
+        "correctAnswer": "Photosynthesis"
+    },
+    {
+        "question_id": "q3_science",
+        "category": "Science",
+        "question_text": "What is the powerhouse of the cell?",
+        "options": ["Nucleus", "Mitochondria", "Ribosome", "Endoplasmic Reticulum"],
+        "correctAnswer": "Mitochondria"
+    },
+    {
+        "question_id": "q4_science",
+        "category": "Science",
+        "question_text": "What is the speed of light?",
+        "options": ["300,000 km/s", "150,000 km/s", "1,000 km/s", "30,000 km/s"],
+        "correctAnswer": "300,000 km/s"
+    },
+    {
+        "question_id": "q5_science",
+        "category": "Science",
+        "question_text": "What is the chemical formula for table salt?",
+        "options": ["NaCl", "KCl", "CaCO3", "H2SO4"],
+        "correctAnswer": "NaCl"
+    },
+
+
+    {
+        "question_id": "q1_history",
+        "category": "History",
+        "question_text": "Who was the first President of the United States?",
+        "options": ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "John Adams"],
+        "correctAnswer": "George Washington"
+    },
+    {
+        "question_id": "q2_history",
+        "category": "History",
+        "question_text": "In which year did World War II end?",
+        "options": ["1945", "1939", "1918", "1963"],
+        "correctAnswer": "1945"
+    },
+    {
+        "question_id": "q3_history",
+        "category": "History",
+        "question_text": "Who was the first man to walk on the moon?",
+        "options": ["Neil Armstrong", "Buzz Aldrin", "John Glenn", "Alan Shepard"],
+        "correctAnswer": "Neil Armstrong"
+    },
+    {
+        "question_id": "q4_history",
+        "category": "History",
+        "question_text": "What ancient civilization built the pyramids?",
+        "options": ["Romans", "Greeks", "Egyptians", "Mayans"],
+        "correctAnswer": "Egyptians"
+    },
+    {
+        "question_id": "q5_history",
+        "category": "History",
+        "question_text": "Who was the British Prime Minister during World War II?",
+        "options": ["Winston Churchill", "Neville Chamberlain", "Clement Attlee", "Margaret Thatcher"],
+        "correctAnswer": "Winston Churchill"
+    },
+
+    
+    {
+        "question_id": "q1_sports",
+        "category": "Sports",
+        "question_text": "Which country won the FIFA World Cup in 2018?",
+        "options": ["Germany", "Brazil", "France", "Argentina"],
+        "correctAnswer": "France"
+    },
+    {
+        "question_id": "q2_sports",
+        "category": "Sports",
+        "question_text": "In which sport is the term 'home run' used?",
+        "options": ["Basketball", "Baseball", "Soccer", "Tennis"],
+        "correctAnswer": "Baseball"
+    },
+    {
+        "question_id": "q3_sports",
+        "category": "Sports",
+        "question_text": "How many players are there in a soccer team on the field?",
+        "options": ["9", "10", "11", "12"],
+        "correctAnswer": "11"
+    },
+    {
+        "question_id": "q4_sports",
+        "category": "Sports",
+        "question_text": "Which sport is known as the 'king of sports'?",
+        "options": ["Basketball", "Soccer", "Tennis", "Cricket"],
+        "correctAnswer": "Soccer"
+    },
+    {
+        "question_id": "q5_sports",
+        "category": "Sports",
+        "question_text": "In which sport would you perform a slam dunk?",
+        "options": ["Basketball", "Volleyball", "Tennis", "Rugby"],
+        "correctAnswer": "Basketball"
+    }
+]
