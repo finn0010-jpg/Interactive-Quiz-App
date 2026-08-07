@@ -45,8 +45,10 @@ function showCategoryView() {
     mainHeader.innerHTML = '';
     mainContent.innerHTML = '';
 
-    mainHeader.textContent = 'Select your category:';
+    mainHeader.textContent = 'Choose your category:';
     mainContent.appendChild(categorySelect);
+
+    categorySelect.innerHTML = '';
 
     categoryOptions.forEach(option => {
         const optionElement = document.createElement('option');
@@ -66,7 +68,7 @@ categorySelect.addEventListener('change', () => {
             mainContent.appendChild(errorMessage);
         } else {
             loadQuestions(categorySelect.value);
-            loadData();
+            loadData(categorySelect.value);
         }
     });
 
@@ -82,54 +84,112 @@ function loadQuestions(category) {
     categorySelect.remove();
     mainHeader.textContent = '';
 
-    const backButton = document.createElement('button');
+    const buttonWrapper = document.createElement('div')
+    buttonWrapper.classList.add('btn-wrapper')
+
+    const backButton = document.createElement('button')
     backButton.textContent = 'Back';
-    backButton.classList.add('back-button');
-    mainHeader.appendChild(backButton);
+    backButton.classList.add('back-button')
+
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.classList.add('next-button');
+
+    buttonWrapper.appendChild(backButton)
+    buttonWrapper.appendChild(nextButton)
+
+    mainHeader.appendChild(buttonWrapper)
+    
+
+    currentView = 'questions';
 
     backButton.addEventListener('click', () => {
-
-        let hasBeenClicked = true;
-
-        if (hasBeenClicked) {
-        
-            categorySelect.innerHTML = '';
-
-            categorySelect.remove();
-
-            hasBeenClicked = false;
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayCurrentQuestion();
+        } else if (currentQuestionIndex === 0) {
             showCategoryView();
-        } 
+        }
     });
 
+    nextButton.addEventListener('click', () => {
+        showNextQuestion();
+    });
 
 }
 
+let questions = [];
+let currentQuestionIndex = 0;
 
-function displayQuestions(questions) {
-    questions.forEach((questionObj, index) => {
-        mainContent.innerHTML += `
-            <div class="question-container">
-                <h2>Question ${index + 1}:</h2>
-                <p>${questionObj.question}</p>
-            </div>
-        `;
-    });
+function displayCurrentQuestion() {
+    const questionObj = questions[currentQuestionIndex];
+    mainContent.innerHTML = `
+        <div class="question-container">
+            <h2>Question ${currentQuestionIndex + 1}:</h2>
+            <p>${questionObj.question_text}</p>
+        </div>
+
+        <div class="options-container">
+            <form class="options-form">
+                <label>
+                    <input type="radio" name="option" value="${questionObj.options[0]}">
+                    ${questionObj.options[0]}
+                </label><br>
+                <label>
+                    <input type="radio" name="option" value="${questionObj.options[1]}">
+                    ${questionObj.options[1]}
+                </label><br>
+                <label>
+                    <input type="radio" name="option" value="${questionObj.options[2]}">
+                    ${questionObj.options[2]}
+                </label><br>
+                <label>
+                    <input type="radio" name="option" value="${questionObj.options[3]}">
+                    ${questionObj.options[3]}
+                </label>
+            </form>
+        </div>
+    `;
 }
+
+function showNextQuestion() {
+    currentQuestionIndex++;
+    displayCurrentQuestion();
+}
+
+
+function showOptions(questionObj) {
+    const optionsContainer = document.createElement('div');
+    optionsContainer.classList.add('options-container');
+
+    questionObj.options.forEach(option => {
+        const optionElement = document.createElement('button');
+        optionElement.textContent = option;
+        optionElement.classList.add('option-button');
+        optionsContainer.appendChild(optionElement);
+    });
+
+    mainContent.appendChild(optionsContainer);
+}
+
+
+
 // Function to load questions once a category is selected
-async function loadData() {
+async function loadData(category) {
     try {
         const response = await fetch('./questionsandanswers.json');
-
         const data = await response.json();
+        const selectedQuestions = data[category];
 
-
-    if (categorySelect.value === 'general') {
-        const generalQuestions = data.general;
-        displayQuestions(generalQuestions);
-    }
-            
+        if (selectedQuestions) {
+            questions = selectedQuestions;
+            displayCurrentQuestion();
+        } else {
+            mainContent.innerHTML = '<p>No questions found for this category.</p>';
+        }
     } catch (error) {
         console.error('Error loading data:', error);
     }
 }
+
+// Keep track of user answers and display it after the last question
