@@ -77,6 +77,7 @@
             "correctAnswer": "Leonardo da Vinci"
         }
     ],
+
     "science": [
         {
             "question_id": "q1_science",
@@ -114,6 +115,7 @@
             "correctAnswer": "NaCl"
         }
     ],
+
     "history": [
         {
             "question_id": "q1_history",
@@ -151,6 +153,7 @@
             "correctAnswer": "Winston Churchill"
         }
     ],
+    
     "sports": [
         {
             "question_id": "q1_sports",

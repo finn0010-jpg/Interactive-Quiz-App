@@ -23,6 +23,8 @@ let categorySelect = document.createElement('select');
 
 let currentView = 'home';
 
+let userSelection = []
+
 // Function to show the home view
 function showHomeView() {
     header = document.createElement('h1');
@@ -113,7 +115,16 @@ function loadQuestions(category) {
     });
 
     nextButton.addEventListener('click', () => {
+        const selectedRadio = document.querySelector('input[name="option"]:checked');
+
+        if (!selectedRadio) {
+            alert("Please select an answer choice.");
+            return;
+        }
+
+        userSelection[currentQuestionIndex] = selectedRadio.value;
         showNextQuestion();
+        console.log(userSelection);
     });
 
 }
@@ -123,6 +134,17 @@ let currentQuestionIndex = 0;
 
 function displayCurrentQuestion() {
     const questionObj = questions[currentQuestionIndex];
+    const savedAnswer = userSelection[currentQuestionIndex];
+    const optionsMarkup = questionObj.options.map(option => {
+        const isChecked = savedAnswer === option ? 'checked' : '';
+        return `
+            <label>
+                <input type="radio" name="option" value="${option}" ${isChecked}>
+                ${option}
+            </label><br>
+        `;
+    }).join('');
+
     mainContent.innerHTML = `
         <div class="question-container">
             <h2>Question ${currentQuestionIndex + 1}:</h2>
@@ -130,23 +152,8 @@ function displayCurrentQuestion() {
         </div>
 
         <div class="options-container">
-            <form class="options-form">
-                <label>
-                    <input type="radio" name="option" value="${questionObj.options[0]}">
-                    ${questionObj.options[0]}
-                </label><br>
-                <label>
-                    <input type="radio" name="option" value="${questionObj.options[1]}">
-                    ${questionObj.options[1]}
-                </label><br>
-                <label>
-                    <input type="radio" name="option" value="${questionObj.options[2]}">
-                    ${questionObj.options[2]}
-                </label><br>
-                <label>
-                    <input type="radio" name="option" value="${questionObj.options[3]}">
-                    ${questionObj.options[3]}
-                </label>
+            <form class="options-form" id="options-form">
+                ${optionsMarkup}
             </form>
         </div>
     `;
@@ -154,7 +161,7 @@ function displayCurrentQuestion() {
 
 function showNextQuestion() {
     currentQuestionIndex++;
-    displayCurrentQuestion();
+    displayCurrentQuestion()
 }
 
 
@@ -192,4 +199,7 @@ async function loadData(category) {
     }
 }
 
-// Keep track of user answers and display it after the last question
+// Keep track of user answers and display total score after the last question
+
+// Save user answer to an array inside a variable
+// Check the answers against the correct answers within the JSON
