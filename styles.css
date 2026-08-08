@@ -104,3 +104,21 @@ body {
 .question-container p {
     font-size: 20px;
 }
+
+.result-item span, .result-item h3 {
+    font-size: 24px;
+}
+
+.result-item p {
+    font-size: 20px;
+}
+
+.results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.results-container h2 {
+    font-size: 32px;
+}

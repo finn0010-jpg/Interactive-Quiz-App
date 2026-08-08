@@ -124,7 +124,6 @@ function loadQuestions(category) {
 
         userSelection[currentQuestionIndex] = selectedRadio.value;
         showNextQuestion();
-        console.log(userSelection);
     });
 
 }
@@ -161,7 +160,12 @@ function displayCurrentQuestion() {
 
 function showNextQuestion() {
     currentQuestionIndex++;
-    displayCurrentQuestion()
+
+    if (currentQuestionIndex >= questions.length) {
+        checkAnswers()
+    } else {
+        displayCurrentQuestion()
+    }
 }
 
 
@@ -199,7 +203,37 @@ async function loadData(category) {
     }
 }
 
-// Keep track of user answers and display total score after the last question
+function checkAnswers() {
+    let score = 0
 
-// Save user answer to an array inside a variable
+    const resultsMarkup = questions.map((questionObj, index) => {
+        const userAnswer = userSelection[index];
+        const isCorrect = userAnswer === questionObj.correctAnswer
+
+        if (isCorrect) {
+            score++
+        }
+
+        return `
+            <div class="result-item">
+                <h3><span>${index + 1}.</span> ${questionObj.question_text}</h3>
+                <p>Your answer: ${userAnswer ?? 'No answer selected'}
+                    ${isCorrect ? '✅' : `❌`}
+                    ${!isCorrect ? `<p>Correct answer: ${questionObj.correctAnswer} ✅</p>` : ''}
+                </p>
+            </div>
+        `
+
+    }).join('')
+
+    mainHeader.innerHTML = ''
+    mainContent.innerHTML = `
+        <div class="results-container">
+            <h2>Your score: ${score} / ${questions.length}</h2>
+            ${resultsMarkup}
+        </div>
+    `
+}
+
+// Keep track of user answers and display total score after the last question
 // Check the answers against the correct answers within the JSON
