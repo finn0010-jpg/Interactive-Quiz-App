@@ -1,4 +1,4 @@
-LIVE SITE: [clickable text]stanfieldquizapp.vercel.app
+LIVE SITE: https://stanfieldquizapp.vercel.app
 
 
 # Interactive Quiz App
