@@ -14,11 +14,9 @@ const categoryOptions = [
         { value: 'capitals', text: 'Capitals' }
     ]
 
-let categorySelect = document.createElement('select');
-    categorySelect.id = 'category-select';
-    categorySelect.classList.add('category-select');
-    categorySelect.id = 'category-select';
-    categorySelect.name = 'category-select';
+let categoryList = document.createElement('ul');
+    categoryList.id = 'category-list';
+    categoryList.classList.add('category-list');
 
 
 let currentView = 'home';
@@ -28,9 +26,17 @@ let userSelection = []
 // Function to show the home view
 function showHomeView() {
     header = document.createElement('h1');
-    header.textContent = 'Welcome! This is a quiz that will test your general knowledge. Click the button below to start the quiz.';
+    header.textContent = 'Welcome! This is a quiz that will test your knowledge of your preferred subject. Select a category below to begin.';
     header.classList.add('main-header');
     mainHeader.appendChild(header);
+
+    mainContent.appendChild(categoryList);
+
+    categoryOptions.forEach(option => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<input type="radio" name="option" value="${option.value}"> ${option.text}`;
+        categoryList.appendChild(listItem);
+    });
 
     startButton = document.createElement('button');
     startButton.textContent = 'Start Quiz';
@@ -38,53 +44,46 @@ function showHomeView() {
     mainContent.appendChild(startButton);
 
     currentView = 'home';
-}
 
-document.addEventListener('DOMContentLoaded', showHomeView());
-
-// Function to show the category selection view
-function showCategoryView() {
-    mainHeader.innerHTML = '';
-    mainContent.innerHTML = '';
-
-    mainHeader.textContent = 'Choose your category:';
-    mainContent.appendChild(categorySelect);
-
-    categorySelect.innerHTML = '';
-
-    categoryOptions.forEach(option => {
-        const optionElement = document.createElement('option');
-        optionElement.value = option.value;
-        optionElement.textContent = option.text;
-        categorySelect.appendChild(optionElement);
-    });
-
-    currentView = 'categories';
-}
-
-categorySelect.addEventListener('change', () => {
-        if (categorySelect.value === 'select') {
+    categoryList.addEventListener('change', () => {
+        if (!categoryList.querySelector('input[name="option"]:checked') || categoryList.querySelector('input[name="option"]:checked').value === 'select') {
             const errorMessage = document.createElement('p');
             errorMessage.textContent = 'Please select a category to continue.';
             errorMessage.classList.add('error-message');
             mainContent.appendChild(errorMessage);
+        } 
+    });
+
+    startButton.addEventListener('click', () => {
+        const selectedOption = categoryList.querySelector('input[name="option"]:checked');
+        if (!selectedOption || selectedOption.value === 'select') {
+            alert('Please select a category to continue.');
         } else {
-            loadQuestions(categorySelect.value);
-            loadData(categorySelect.value);
+            loadQuestions(selectedOption.value);
         }
     });
 
+}
+
+document.addEventListener('DOMContentLoaded', showHomeView);
+
+// End
 
 
-startButton.addEventListener('click', () => {
-    showCategoryView();
-});
+// Function to show home view when clicking back button
 
+function showHomeViewFromBackButton() {
+    mainContent.innerHTML = '';
+    mainHeader.innerHTML = '';
+    showHomeView();
+}
+
+// End
 
 // Function to load questions based on selected category
 function loadQuestions(category) {
-    categorySelect.remove();
-    mainHeader.textContent = '';
+    mainHeader.innerHTML = '';
+    mainContent.innerHTML = '';
 
     const buttonWrapper = document.createElement('div')
     buttonWrapper.classList.add('btn-wrapper')
@@ -101,16 +100,15 @@ function loadQuestions(category) {
     buttonWrapper.appendChild(nextButton)
 
     mainHeader.appendChild(buttonWrapper)
-    
 
     currentView = 'questions';
 
     backButton.addEventListener('click', () => {
         if (currentQuestionIndex > 0) {
             currentQuestionIndex--;
-            displayCurrentQuestion();
+            displayCurrentQuestion(category);
         } else if (currentQuestionIndex === 0) {
-            showCategoryView();
+            showHomeViewFromBackButton();
         }
     });
 
@@ -126,12 +124,13 @@ function loadQuestions(category) {
         showNextQuestion();
     });
 
+    loadData(category);
 }
 
 let questions = [];
 let currentQuestionIndex = 0;
 
-function displayCurrentQuestion() {
+function displayCurrentQuestion(category) {
     const questionObj = questions[currentQuestionIndex];
     const savedAnswer = userSelection[currentQuestionIndex];
     const optionsMarkup = questionObj.options.map(option => {
@@ -164,7 +163,7 @@ function showNextQuestion() {
     if (currentQuestionIndex >= questions.length) {
         checkAnswers()
     } else {
-        displayCurrentQuestion()
+        displayCurrentQuestion();
     }
 }
 
@@ -183,7 +182,7 @@ function showOptions(questionObj) {
     mainContent.appendChild(optionsContainer);
 }
 
-
+// End
 
 // Function to load questions once a category is selected
 async function loadData(category) {
@@ -234,6 +233,6 @@ function checkAnswers() {
         </div>
     `
 }
-
+// End
 // Keep track of user answers and display total score after the last question
 // Check the answers against the correct answers within the JSON

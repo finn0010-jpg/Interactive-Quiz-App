@@ -4,17 +4,9 @@
     box-sizing: border-box;
 }
 
-:root {
-    --primary-color: #2B438D;
-    --secondary-color: #94ADFF;
-    --trinary-color: #E8FD94;
-    --background-gradient: linear-gradient(to bottom right, var(--primary-color), var(--secondary-color));
-    --container-background: radial-gradient(circle at bottom right, var(--primary-color), var(--secondary-color));
-}
-
 body {
     font-family: Arial, sans-serif;
-    background: var(--container-background);
+    background: black;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     color: white;
@@ -27,18 +19,18 @@ body {
 }
 
 .container-main {
-    max-width: 375px;
-    background: var(--primary-color);
+    max-width: 95vw;
+    background: #342E37;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 0 15px 5px rgba(0, 125, 255, 0.5);
+    box-shadow: 0 0 15px 5px rgba(52, 46, 55, 0.5);
     height: fit-content;
 }
 
 .main-header {
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 16px;
+    margin-bottom: 1.25em;
+    font-size: 1.2em;
     line-height: 1.2;
     font-weight: 400;
 }
@@ -46,40 +38,40 @@ body {
 .main-content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1.25em;
 }
 
 .start-button {
     padding: 10px 20px;
-    background: var(--primary-color);
+    background: #342E37;
     color: white;
     border: 2px solid white;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 1em;
     font-weight: 400;
 }
 
 
 .category-select {
     padding: 10px;
-    background: var(--primary-color);
+    background: #342E37;
     color: white;
     border: 2px solid white;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 1em;
     font-weight: 400;
 }
 
 .back-button, .next-button {
     padding: 10px 20px;
-    background: var(--primary-color);
+    background: #342E37;
     color: white;
     border: 2px solid white;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.125em;
     font-weight: 400;
 }
 
@@ -122,4 +114,32 @@ body {
 
 .results-container h2 {
     font-size: 32px;
+}
+
+#category-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    font-size: 1.125em;
+}
+
+@media (min-width: 768px) {
+    .main-header {
+        font-size: 1.3em;
+    }
+
+    #category-list {
+        flex-direction: row;
+        font-size: 1.3em;
+    }
+
+    .start-button {
+        font-size: 1.3em;
+    }
 }
